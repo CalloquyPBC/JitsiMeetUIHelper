@@ -150,41 +150,48 @@ export default class JitsiMeetUIHelper {
      * Get room & display name from URL
      */
     initRoomFromURL(){
-        const queryString = window.location.search;
-        const urlParams = new URLSearchParams(queryString);
+        this.displayName = 'SIP Participant';
+        this.roomID = 'ROOM_ID';
+        this.ivr.setRoomID(this.roomID);
 
-        if (urlParams.has('display_name')) {
-            this.displayName = urlParams.get('display_name');
-        }
+      //   const queryString = window.location.search;
+      //   const urlParams = new URLSearchParams(queryString);
+      //
+      //   if (urlParams.has('display_name')) {
+      //       this.displayName = urlParams.get('display_name');
+      //   } else {
+      //       this.displayName = 'SIP Participant';
+      //   }
+      //
+      //   if (!urlParams.has('room_id')) {
+      //       this.onError('room_id', 'not_set');
+      //
+      //   }else {
+      //       let roomIDFromURL = urlParams.get('room_id');
+      //
+      //       // Set roomID pattern
+      //       if (roomIDFromURL !== null) {
+      //           const minLength = Config.get('ivr.conference_code.min_length');
+      //           const maxLength = Config.get('ivr.conference_code.max_length');
+      //           const num = Number(roomIDFromURL);
+      //           if (num === Config.get('ivr.number')) {
+      //               this.onError('room_id', 'not_set');
+      //           }else{
+      //               if (Config.get('ivr.confmapper_url') && !Number.isInteger(num)){
+      //                   this.onError('room_id', 'bad_format', roomIDFromURL)
+      //               }else{
+      //                   const len = Math.ceil(Math.log(roomIDFromURL + 1) / Math.LN10) -1;
+      //                   if (len < minLength || len > maxLength){
+      //                       this.onError('room_id', 'bad_format', roomIDFromURL)
+      //                   }else{
+      //                       this.roomID = roomIDFromURL;
+      //                       this.ivr.setRoomID(roomIDFromURL);
+      //                   }
+      //               }
+      //           }
+      //       }
+	    // }
 
-        if (!urlParams.has('room_id')) {
-            this.onError('room_id', 'not_set');
-
-        }else {
-            let roomIDFromURL = urlParams.get('room_id');
-
-            // Set roomID pattern
-            if (roomIDFromURL !== null) {
-                const minLength = Config.get('ivr.conference_code.min_length');
-                const maxLength = Config.get('ivr.conference_code.max_length');
-                const num = Number(roomIDFromURL);
-                if (num === Config.get('ivr.number')) {
-                    this.onError('room_id', 'not_set');
-                }else{
-                    if (Config.get('ivr.confmapper_url') && !Number.isInteger(num)){
-                        this.onError('room_id', 'bad_format', roomIDFromURL)
-                    }else{
-                        const len = Math.ceil(Math.log(roomIDFromURL + 1) / Math.LN10) -1;
-                        if (len < minLength || len > maxLength){
-                            this.onError('room_id', 'bad_format', roomIDFromURL)
-                        }else{
-                            this.roomID = roomIDFromURL;
-                            this.ivr.setRoomID(roomIDFromURL);
-                        }
-                    }
-                }
-            }
-	    }
     }
 
     /**
